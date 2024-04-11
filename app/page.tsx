@@ -1,22 +1,35 @@
-import Image from "next/image";
-import Title from "@/app/_components/title";
-import GlobalNavigation from "@/app/_components/global-navigation";
-import Profile from "@/app/_components/profile";
-import Skill from "@/app/_components/skill";
-import Projects from "@/app/_components/projects";
-import Contact from "@/app/_components/contact";
-import Footer from "@/app/_components/footer";
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+
+import Header from "@/components/header";
+import FirstView from "@/components/first-view";
+import Profile from "@/components/profile";
+import Career from "@/components/career";
+import Skills from "@/components/skills";
+import Projects from "@/components/projects";
+import Contact from "@/components/contact";
+import Footer from "@/components/footer";
+
+
+const navigationTabValues = [
+  { label: 'Profile', href: '#profile' },
+  { label: 'Skill', href: '#skill' },
+  { label: 'Projects', href: '#projects' },
+  { label: 'Contact', href: '#contact' },
+];
+
 
 export default function Home() {
   return (
-    <main>
-      <Title />
-      <GlobalNavigation />
+    <Box sx={{ p: 0, bgcolor:'primary.main'}}>
+      <Header />
+      <FirstView />
       <Profile />
-      <Skill />
+      <Career />
+      <Skills />
       <Projects />
       <Contact />
       <Footer />
-    </main>
+    </Box>
   );
 }

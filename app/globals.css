@@ -1,27 +1,155 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import 'material-symbols';
+
+/* @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200'); */
 
 :root {
   --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --background-rgb: 238, 236, 212;
+  --foreground-hex: #000000;
+  --background-hex: #FFFFFF;
+  --body-background-hex: #FFFFFF;
+  --base-color: #EEECD4;
+  --on-base-color: #000;
+  --main-color-l: #f6f6f0;
+  --main-color-d: #827081;
+  --on-main-color: #FFFFFF;
+  --accent-color: #2CA58D;
 }
+
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
+    --background-rgb: 130, 112, 129;
+    --background-hex: #e0dfd3;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+  --base-color: #827081;
+  --on-base-color: #FFFFFF;
+  --main-color-l: #EEECD4;
+  --main-color-d: #5f535e;
+  --on-main-color: #000;
+  --accent-color: #2CA58D;
   }
+
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: var(--on-base-color);
+  background-color: var(--base-color);
 }
+
+header {
+  display: flex;
+  background-color: var(--main-color-l);
+}
+
+h3 {
+  font-weight: 700;
+  font-size: 1.8em;
+  margin-bottom: 0.6em;
+  text-align: center;
+}
+
+h4 {
+  font-weight: 600;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.work-image {
+  border-radius: 50%;
+  background-color: var(--main-color-l);
+}
+
+.material-symbols-list-icon {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+
+
+ul {
+  list-style: disc;
+}
+
+/* @counter-style hoge {
+  system: cyclic;
+  symbols: "\ef7b" "\efb7";
+  suffix: "";
+}
+
+
+ul.list-career-works {
+  list-style: hoge;
+} */
+ul.list-career-works > li::marker {
+  font-family: "Material Symbols Outlined";
+  display: list-item;
+  font-size: 1.4rem;
+  white-space: normal;
+}
+
+ul.list-career-works > li.fr::marker {
+  /* appalel */
+  content: "\ef7b\2009";
+}
+
+ul.list-career-works > li.gov::marker {
+  /* government */
+  content: "\e84f\2009";
+}
+
+ul.list-career-works > li.city::marker {
+  /* city */
+  content: "\e7f1\2009";
+}
+
+ul.list-career-works > li.car::marker {
+  /* car */
+  content: "\e531\2009";
+}
+
+ul.list-career-works > li.flight::marker {
+  /* flight */
+  content: "\ef93\2009";
+}
+
+ul.list-career-works > li.store::marker {
+  /* store */
+  content: "\e8d1\2009";
+}
+
+ul.list-career-works > li.mc::marker {
+  /* shopping */
+  content: "\f1cc\2009";
+}
+
+ul.list-career-works > li.guide::marker {
+  /* guideline */
+  content: "\e99e\2009";
+}
+
+ul.list-career-works > li.design::marker {
+  /* design */
+  content: "\f10a\2009";
+}
+
+
+ul.list-career-works > li.db::marker {
+  /* database */
+  content: "\f20e\2009";
+}
+

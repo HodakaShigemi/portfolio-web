@@ -1,0 +1,64 @@
+name: CICD Pipeline for Portfolio contents
+
+env:
+  AWS_REGION: us-west-2
+  SITE_URL: www.se-shigemi.com
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # - name: get git commit hash
+      #   run: echo "container_version=$(git rev-parse --short=8 head)" >> $github_env
+
+      # - name: get the version
+      #   id: get_version
+      #   run: echo ::set-output name=version::${github_ref#refs/tags/}
+
+      # - name: print the version
+      #   run: echo "tag name is ${{ steps.get_version.outputs.version }}"
+
+      # - run: echo "🔎 the name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+
+      # - name: check out repository code
+      #   uses: actions/checkout@v3
+      #   with:
+      #     ref: ${{ github.ref }}
+
+      # - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+
+      # - name: List files in the repository
+      #   run: |
+      #     ls ${{ github.workspace }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - run: npm install
+      - run: npm run build
+  
+      - name: setup AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${AWS_REGION}
+
+      - name: sync contents
+        run: |
+          pwd && ls
+          aws s3 sync --delete ./out s3://${{ secrets.S3_BUCKET_NAME }}
+
+      - name: clear CDN chache
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CDN_DISTRIBUTION_ID }} --paths "/*"
+
+      - name: test
+        run: curl -I https://${SITE_URL}
